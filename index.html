@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redirecting to /web/...</title>
+    <!-- 1. META REFRESH: Instantly redirects users to the /web/ folder -->
+    <!-- Google interprets a 0-second refresh as a permanent redirect (like a 301) [citation:7] -->
     <meta http-equiv="refresh" content="0; url='./web/'">
+
+    <!-- 2. CANONICAL TAG: Tells Google that the /web/ URL is the authoritative one -->
+    <link rel="canonical" href="https://parkmysite.github.io/web/">
+
+    <title>Redirecting to /web/...</title>
+    <!-- Optional: Add a short description for social previews or if the redirect fails -->
+    <meta name="description" content="Park My Site - Redirecting to main website.">
   </head>
   <body>
+    <!-- This text is a fallback if the redirect doesn't work automatically -->
     <p>If you are not redirected, <a href="./web/">click here</a>.</p>
   </body>
 </html>
