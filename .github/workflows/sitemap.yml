@@ -1,0 +1,31 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate a sitemap
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # This is important to get the last commit dates for your files [citation:1][citation:6]
+
+    - name: Generate the sitemap
+      id: sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://parkmysite.github.io/ # <-- Update this to your root URL [citation:1]
+
+    - name: Commit and Push the Sitemap
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@users.noreply.github.com'
+        git add sitemap.xml
+        git commit -m "Automatically generated sitemap" || echo "No changes to commit"
+        git push
